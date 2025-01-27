@@ -1,8 +1,15 @@
 const express = require('express')
-const app = express.app()
-const verified = require('../middlewere/input_validator')
+const app = express()
+const verified = require('./middlewere/input_validator')
 const routes = require('./routes/routes')
 
-app.use('/:id', verified, routes)
+app.use('/books', verified, routes)
 
-app.get('/books', routes)
+
+
+// server
+const hostname = "127.0.0.1"
+const port = 3001
+
+// starts a simple http server locally on port 3000
+app.listen(port, `${hostname}`);

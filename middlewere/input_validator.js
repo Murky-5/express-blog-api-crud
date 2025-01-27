@@ -5,10 +5,10 @@ const verified = (req, res, next) => {
     let answer;
     const verId = list.find((verifier) => req.params.id == verifier.id)
     if (isNaN(req.params.id)) {
-        console.log(req.params.id)
-        verified_in = 500
-        console.log(list)
-    } else if (verId.length > 0) {
+/*         console.log(req.params.id)
+ */        verified_in = 500
+/*         console.log(list)
+ */    } else if (verId.length > 0) {
         verified_in = 200
     } else {
         verified_in = 404

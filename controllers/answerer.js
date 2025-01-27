@@ -1,11 +1,14 @@
 const list = require('../posts/books')
 
-const found = list.find((digger) => digger.id == params.id)
+const found = (params) => list.find((digger) => digger.id == params.id)
 
 const scroller = (id) => id = list[list.length - 1].id + 1
 
 
-const show = ({params}, res, next) => res.json(found)
+const show = ({params}, res, next) => {
+    console.log(list.findIndex((digger) => digger.id == params.id))
+    res.json(found(params))
+}
 
 const create = ({body}, res, next) => {
     list.push({
@@ -23,7 +26,7 @@ const update = ({body, params}, res, next) => {
     found.coverPicture = body.coverPicture
     found.tags = body.tags
 
-    res.json(found)
+    res.json(found(params))
 }
 
 const modify = ({body, params}, res, next) => {
@@ -31,10 +34,13 @@ const modify = ({body, params}, res, next) => {
     found.coverPicture = body.coverPicture || found.coverPicture
     found.tags = body.tags || found.tags
 
-    res.json(found)
+    res.json(found(params))
 }
 
-
-const destroy = ({params}, req, res) => res.json(list.splice( list.findIndex((digger) => digger.id == params.id) , 1 ))
+const destroy = ({params}, req, res, next) => {
+    console.log("ciao")
+    list.splice( list.findIndex((digger) => digger.id == params.id) , 1 )
+    res.sendStatus(204)
+}
 
 module.exports = {show, create, update, modify, destroy}

@@ -1,5 +1,5 @@
 const express = require('express')
-const router = express.router()
+const router = express.Router()
 const list = require('../posts/books')
 const {show, create, update, modify, destroy} = require('../controllers/answerer')
 
